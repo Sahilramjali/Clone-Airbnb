@@ -2,8 +2,10 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { Nunito } from 'next/font/google'
 import Navbar from './components/navbar/navbar'
-import Modal from './components/Modals/Modal'
+// import Modal from './components/Modals/Modal'
 import ClientOnly from './components/clientOnly'
+import RegisterModel from './components/Modals/registerModal'
+import ToasterProvider from './providers/toasterProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -21,10 +23,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Modal isOpen/>
+      <body className={font.className}>
+        
         <ClientOnly>
+          <ToasterProvider/>
+        <RegisterModel/>
         <Navbar/>
+        
         </ClientOnly>
         
         {children}

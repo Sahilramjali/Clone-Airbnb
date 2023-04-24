@@ -13,7 +13,7 @@ const Navbar=()=>{
                     <div className="
                     flex
                     flex-row
-                    item-center
+                    items-center
                     justify-between
                     gap-3
                     md:gap-0
