@@ -82,6 +82,12 @@ const Modal: React.FC<ModalProps> = ({
           
         "
       >
+        <div className=" relative w-full h-3/4
+        overflow-y-hidden
+        hover:overflow-y-scroll
+        scrollbar-hide 
+        ">
+
         <div className="
           relative 
           w-full
@@ -182,6 +188,8 @@ const Modal: React.FC<ModalProps> = ({
             </div>
           </div>
         </div>
+        </div>
+        
       </div>
     </>
   );

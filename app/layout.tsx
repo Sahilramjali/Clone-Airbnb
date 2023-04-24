@@ -23,6 +23,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>
+          Airbnb
+        </title>
+        <link rel='icon' href='/airbnb.svg' type='image/x-icon'/>
+      </head>
       <body className={font.className}>
         
         <ClientOnly>
