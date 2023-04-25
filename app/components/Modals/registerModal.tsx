@@ -39,6 +39,7 @@ const RegisterModel = () => {
       })
       .finally(() => {
         setIsLoading(false);
+        
       });
   };
 

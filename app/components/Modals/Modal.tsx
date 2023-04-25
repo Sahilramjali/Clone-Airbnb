@@ -79,13 +79,16 @@ const Modal: React.FC<ModalProps> = ({
           outline-none 
           focus:outline-none
           bg-neutral-800/70
+        
           
         "
       >
         <div className=" relative w-full h-3/4
+     
         overflow-y-hidden
         hover:overflow-y-scroll
         scrollbar-hide 
+       
         ">
 
         <div className="
@@ -97,6 +100,8 @@ const Modal: React.FC<ModalProps> = ({
           my-6
           mx-auto 
           h-full 
+          lg:h-auto
+          md:h-auto
           lg:h-auto
           md:h-auto
           "
