@@ -11,6 +11,7 @@ import Heading from "../heading";
 import Input from "../inputs/Input";
 import toast from "react-hot-toast";
 import Button from "../button";
+import { signIn } from "next-auth/react";
 const RegisterModel = () => {
   const registerModal = useRegisterModel();
   const [isLoading, setIsLoading] = useState(false);
@@ -82,7 +83,7 @@ const RegisterModel = () => {
       <Button outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => { }}
+        onClick={() => signIn('google')}
       />
       <Button outline
         label="Continue with Facebook"

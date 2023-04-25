@@ -87,7 +87,7 @@ const LoginModal=()=>{
             <Button outline
             label="Login with Google"
             icon={FcGoogle}
-            onClick={()=>{}}
+            onClick={()=>signIn('google')}
             />
             <Button outline
             label="Login with Facebook"
