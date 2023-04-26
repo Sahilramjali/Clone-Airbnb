@@ -11,6 +11,7 @@ import dynamic from "next/dynamic";
 import Input from "../inputs/Input";
 import CountrySelect from "../inputs/countrySelect";
 import Counter from "../inputs/counter";
+import ImageUpload from "../inputs/imageUpload";
 
 enum STEPS{
     CATEGORY=0,
@@ -54,6 +55,7 @@ const RentModal=()=>{
       const guestCount=watch('guestCount');
       const roomCount=watch('roomCount');
       const bathroomCount=watch('bathroomCount');
+      const imageSrc=watch('imageSrc');
       
     //dynamically re-rendering the location in map of the leaflet in location section
       const Map = useMemo(() => dynamic(() => import('../Map'), { 
@@ -156,6 +158,21 @@ const RentModal=()=>{
 
         </div>
       )
+    }
+    if(step===STEPS.IMAGES){
+      bodyContent=(
+        <div className="flex flex-col gap-4">
+          <Heading
+          title="Add a photo of your place"
+          subtitle="Show guests what your place looks like"
+          />
+          <ImageUpload
+          value={imageSrc}
+          onChange={(value)=>setCustomValue('imageSrc',value)}
+          />
+
+        </div>
+      );
     }
 
     return(
