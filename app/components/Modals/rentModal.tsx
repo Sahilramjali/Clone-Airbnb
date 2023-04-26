@@ -10,6 +10,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 import Input from "../inputs/Input";
 import CountrySelect from "../inputs/countrySelect";
+import Counter from "../inputs/counter";
 
 enum STEPS{
     CATEGORY=0,
@@ -50,6 +51,9 @@ const RentModal=()=>{
       });
       const location = watch('location');
       const category = watch('category');
+      const guestCount=watch('guestCount');
+      const roomCount=watch('roomCount');
+      const bathroomCount=watch('bathroomCount');
       
     //dynamically re-rendering the location in map of the leaflet in location section
       const Map = useMemo(() => dynamic(() => import('../Map'), { 
@@ -131,57 +135,29 @@ const RentModal=()=>{
           </div>
         );
       }
-    
+    if(step===STEPS.INFO){
+      bodyContent=(
+        <div className="flex flex-col gap-4">
+          <Heading title="Share some basics about your place" subtitle="What amenities do you have?"/>
+          <Counter title="Guests" subtitle="How many guests do you allow?"
+          value={guestCount}
+          onChange={(value)=>setCustomValue('guestCount',value)}
+          />
+          <hr/>
+          <Counter title="Rooms" subtitle="How many rooms do you have?"
+          value={roomCount}
+          onChange={(value)=>setCustomValue('roomCount',value)}
+          />
+          <hr/>
+          <Counter title="Bathrooms" subtitle="How many bathrooms do you have?"
+          value={bathroomCount}
+          onChange={(value)=>setCustomValue('bathroomCount',value)}
+          />
 
-    
-      if (step === STEPS.DESCRIPTION) {
-        bodyContent = (
-          <div className="flex flex-col gap-8">
-            <Heading
-              title="How would you describe your place?"
-              subtitle="Short and sweet works best!"
-            />
-            <Input
-              id="title"
-              label="Title"
-              disabled={isLoading}
-              register={register}
-              errors={errors}
-              required
-            />
-            <hr />
-            <Input
-              id="description"
-              label="Description"
-              disabled={isLoading}
-              register={register}
-              errors={errors}
-              required
-            />
-          </div>
-        )
-      }
-    
-      if (step === STEPS.PRICE) {
-        bodyContent = (
-          <div className="flex flex-col gap-8">
-            <Heading
-              title="Now, set your price"
-              subtitle="How much do you charge per night?"
-            />
-            <Input
-              id="price"
-              label="Price"
-              formatPrice 
-              type="number" 
-              disabled={isLoading}
-              register={register}
-              errors={errors}
-              required
-            />
-          </div>
-        )
-      }
+        </div>
+      )
+    }
+
     return(
         <Modal
         title="Airbnb your home!"
