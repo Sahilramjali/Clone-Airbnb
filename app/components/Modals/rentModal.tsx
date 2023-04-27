@@ -6,12 +6,15 @@ import { useMemo, useState } from "react";
 import Heading from "../heading";
 import { categories } from "../navbar/categories";
 import CategoryInput from "../inputs/categoryInput";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 import Input from "../inputs/Input";
 import CountrySelect from "../inputs/countrySelect";
 import Counter from "../inputs/counter";
 import ImageUpload from "../inputs/imageUpload";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 enum STEPS{
     CATEGORY=0,
@@ -24,6 +27,7 @@ enum STEPS{
 }
 
 const RentModal=()=>{
+  const router=useRouter();
     const rentModal=useRentModal();
     const [step,setStep]=useState(STEPS.CATEGORY);
     const [isLoading,setIsLoading]=useState(false);
@@ -57,6 +61,7 @@ const RentModal=()=>{
       const bathroomCount=watch('bathroomCount');
       const imageSrc=watch('imageSrc');
       
+      
     //dynamically re-rendering the location in map of the leaflet in location section
       const Map = useMemo(() => dynamic(() => import('../Map'), { 
         ssr: false 
@@ -80,6 +85,25 @@ const RentModal=()=>{
         setStep(value=>value+1)
        
     }
+
+    const onSubmit:SubmitHandler<FieldValues>=(data)=>{
+        if(step!==STEPS.PRICE){
+           return onNext();
+        }
+        setIsLoading(true);
+        axios.post('/api/listings',data).then(()=>{
+          toast.success("listing created");
+          router.refresh();
+          reset();
+          
+          rentModal.onClose();
+          setStep(STEPS.CATEGORY);
+        }).catch((e)=>{
+          toast.error(e)
+        }).finally(()=>{
+          setIsLoading(false);
+        })
+    } 
     const actionLabel=useMemo(()=>{
             if(step===STEPS.PRICE){
                 return 'Create'
@@ -203,13 +227,33 @@ const RentModal=()=>{
 
       );
     }
+    if(step===STEPS.PRICE){
+       bodyContent=(
+        <div className="flex flex-col gap-2">
+          <Heading
+          title="Now,set your price"
+          subtitle="How munch do you charge per night?"
+          />
+            <Input
+            id='price'
+            label='Price'
+            formatPrice
+            disabled={isLoading}
+            register={register}
+            type="number"
+            errors={errors}
+            required
+            />
+        </div>
+       )
+    }
 
     return(
         <Modal
         title="Airbnb your home!"
         isOpen={rentModal.isOpen}
         onClose={rentModal.onClose}
-        onSubmit={onNext}
+        onSubmit={handleSubmit(onSubmit)}
         actionLabel={actionLabel}
         secondaryActionLabel={secondaryActionLabel}
         secondaryAction={step===STEPS.CATEGORY?undefined:onBack}
