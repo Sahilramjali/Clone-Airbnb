@@ -174,6 +174,35 @@ const RentModal=()=>{
         </div>
       );
     }
+    if(step===STEPS.DESCRIPTION){
+      bodyContent=(
+        <div className="flex flex-col gap-2">
+          
+            <Heading title="how would you describe your place"
+            subtitle="short and sweet works best"
+            />
+            <Input 
+            id='title'
+            label="Title"
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+            />
+            <hr/>
+            <Input
+            id='description'
+            label='Description'
+            disabled={isLoading}
+            register={register}
+            errors={errors}
+            required
+            />
+
+        </div>
+
+      );
+    }
 
     return(
         <Modal
