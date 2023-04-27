@@ -1,13 +1,51 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+import ClientOnly from './components/clientOnly'
+import  Container  from './components/container'
+import EmptyState from './components/emptystate';
+import getListing from './actions/getListing';
+import ListingCard from './components/listing/listing';
+import getCurrentUser from './actions/getCurrentUser';
 
-export default function Home() {
+
+export default async function Home() {
+  const listing=await getListing();
+  const currentUser=await getCurrentUser();
+ 
+  if(listing.length===0){
+    return(
+      <ClientOnly>
+        <EmptyState showReset/>
+      </ClientOnly>
+    )
+  }
  
   return (
-    <div className='text-rose-500 text-2xl'>
-      hello Airbnb
-    </div>
-  )
+    <ClientOnly>
+      <Container>
+        <div
+        className='
+        pt-20
+        grid
+        grid-cols-1
+        sm:grid-cols-2
+        md:grid-cols-3
+        lg:grid-cols-4
+        xl:grid-cols-5
+        2xl:grid-xols-6
+        gap-4
+        '
+        >
+            {listing.map((list:any )=>{
+              return(
+                <ListingCard
+                currentUser={currentUser}
+                key={list.id}
+                data={list}
+                />
+              )
+            })}
+        </div>  
+      </Container>
+    </ClientOnly>
+  );
 }
