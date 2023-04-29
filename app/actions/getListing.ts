@@ -9,7 +9,12 @@ export default async function getListing(){
                 createdAt:'desc'
             }
         }); 
-        return listings;
+        const safeListings=listings.map((item)=>({
+            ...item,
+            createdAt:item.createdAt.toISOString(),
+
+        }))
+        return safeListings;
     }catch(error:any){
         throw new Error(error);
     }
