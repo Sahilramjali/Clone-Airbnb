@@ -12,8 +12,11 @@ import Input from "../inputs/Input";
 import toast from "react-hot-toast";
 import Button from "../button";
 import { signIn } from "next-auth/react";
+
+import useLoginModal from "@/app/hooks/useLogin";
 const RegisterModel = () => {
   const registerModal = useRegisterModel();
+  const loginModal=useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -32,7 +35,9 @@ const RegisterModel = () => {
     axios
       .post("/api/register", data)
       .then(() => {
+        toast.success("Account Created Successfully!"); 
         registerModal.onClose();
+        loginModal.onOpen();
       })
       .catch((err) => {
         console.log(err);
