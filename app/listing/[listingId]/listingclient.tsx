@@ -69,7 +69,7 @@ const ListingClient:React.FC<LisitngClientProps>=({
                 console.log("reservation success");
                 setDateRange(initialDateRange);
                 //redirect to trips
-                router.refresh();
+                router.push('/trips');
             }).catch((e)=>{
                 toast.error("Reservation was unsuccessful! please try again");
             }).finally(()=>{
