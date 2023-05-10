@@ -27,6 +27,7 @@ const SearchModal=()=>{
     const[guestCount,setGuestCount]=useState(1);
     const [roomCount, setRoomCount] = useState(1);
     const [bathroomCount, setBathroomCount] = useState(1);
+    const [isLoading,setIsLoading]=useState(false);
     const [location,setLocation]=useState<CountrySelectValue>()
     const [dateRange, setDateRange] = useState<Range>({
       startDate: new Date(),
@@ -177,7 +178,7 @@ const SearchModal=()=>{
       }
       return (
         <Modal
-         
+          disabled={isLoading}
           isOpen={searchModel.isOpen}
           title="Filters"
           actionLabel={actionLabel}
