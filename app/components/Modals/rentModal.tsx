@@ -250,7 +250,7 @@ const RentModal=()=>{
 
     return(
         <Modal
-        disabled
+        disabled={isLoading}
         title="Airbnb your home!"
         isOpen={rentModal.isOpen}
         onClose={rentModal.onClose}

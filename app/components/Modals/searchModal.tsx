@@ -177,7 +177,7 @@ const SearchModal=()=>{
       }
       return (
         <Modal
-          disabled
+         
           isOpen={searchModel.isOpen}
           title="Filters"
           actionLabel={actionLabel}

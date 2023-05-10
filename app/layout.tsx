@@ -12,7 +12,7 @@ import RentModal from './components/Modals/rentModal'
 import SearchModal from './components/Modals/searchModal'
 
 const inter = Inter({ subsets: ['latin'] })
-
+export const dynamic='force-dynamic';
 export const metadata = {
   title: 'Airbnb',
   description: 'Airbnb clone',
