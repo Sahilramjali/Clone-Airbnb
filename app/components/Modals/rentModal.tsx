@@ -63,7 +63,7 @@ const RentModal=()=>{
       
       
     //dynamically re-rendering the location in map of the leaflet in location section
-      const Map = useMemo(() => dynamic(() => import('../Map'), { 
+      const Map = useMemo(() => dynamic(() => import('../map'), { 
         ssr: false 
       }), [location]);
     
@@ -250,6 +250,7 @@ const RentModal=()=>{
 
     return(
         <Modal
+        disabled
         title="Airbnb your home!"
         isOpen={rentModal.isOpen}
         onClose={rentModal.onClose}

@@ -7,7 +7,7 @@ import Avatar from "../avatar";
 import ListingCategory from "./listingcategory";
 import dynamic from "next/dynamic";
 
-const Map=dynamic(()=>import('../Map'),{
+const Map=dynamic(()=>import('../map'),{
     ssr:false
 });
 interface ListingInfoProps{

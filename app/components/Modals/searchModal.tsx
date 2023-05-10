@@ -33,7 +33,8 @@ const SearchModal=()=>{
       endDate: new Date(),
       key: 'selection'
     });
-    const Map = useMemo(() => dynamic(() => import('../Map'), { 
+    const Map = useMemo(() => dynamic(() => import('../map'), { 
+   
         ssr: false 
       }), [location]);
     
@@ -176,6 +177,7 @@ const SearchModal=()=>{
       }
       return (
         <Modal
+          disabled
           isOpen={searchModel.isOpen}
           title="Filters"
           actionLabel={actionLabel}
